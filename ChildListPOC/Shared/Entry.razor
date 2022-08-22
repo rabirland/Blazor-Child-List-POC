@@ -1,0 +1,17 @@
+﻿@code {
+    [CascadingParameter]
+    public List ParentList { get; set; }
+
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        if (ParentList != null)
+        {
+            ParentList?.AddEntry(this);
+        }
+    }
+}

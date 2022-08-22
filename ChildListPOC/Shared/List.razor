@@ -1,0 +1,41 @@
+﻿<CascadingValue Value="this">
+    @ChildContent @* Mandatory to initialize the childs, otherwise they won't call "AddEntry" *@
+
+    <div class="flow-list">
+        @foreach (var entry in listEntries)
+        {
+            <div class="list-entry">
+                @entry.ChildContent
+            </div>
+        }
+    </div>
+</CascadingValue>
+
+@code {
+    private List<Entry> listEntries = new List<Entry>();
+    private bool isDirty = false;
+
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
+        if (this.isDirty)
+        {
+            this.isDirty = false;
+            this.StateHasChanged();
+        }
+    }
+
+    public void AddEntry(Entry entry)
+    {
+        this.listEntries.Add(entry);
+        this.isDirty = true;
+    }
+}
