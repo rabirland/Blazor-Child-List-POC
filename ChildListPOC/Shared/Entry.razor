@@ -1,6 +1,6 @@
 ﻿@code {
-    [CascadingParameter]
-    public List ParentList { get; set; }
+     [CascadingParameter]
+    public List? ParentList { get; set; }
 
     [Parameter]
     public RenderFragment? ChildContent { get; set; }

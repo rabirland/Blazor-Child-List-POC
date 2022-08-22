@@ -13,29 +13,13 @@
 
 @code {
     private List<Entry> listEntries = new List<Entry>();
-    private bool isDirty = false;
 
     [Parameter]
     public RenderFragment? ChildContent { get; set; }
 
-    protected override void OnInitialized()
-    {
-        base.OnInitialized();
-    }
-
-    protected override void OnAfterRender(bool firstRender)
-    {
-        base.OnAfterRender(firstRender);
-        if (this.isDirty)
-        {
-            this.isDirty = false;
-            this.StateHasChanged();
-        }
-    }
-
     public void AddEntry(Entry entry)
     {
         this.listEntries.Add(entry);
-        this.isDirty = true;
+        this.StateHasChanged();
     }
 }
